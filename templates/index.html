@@ -1,0 +1,63 @@
+<html>
+<style>
+
+</style>
+<head>
+    <meta http-equiv="refresh" content="120"> <!-- Refresh la fiecare 2 minute -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <p>Bine ai venit, {{ session['username'] }}!</p>
+    <form method="POST" action="/submit">
+        <textarea name="content" required></textarea>
+        <button type="submit">Trimite idee</button>
+    </form>
+    <div class="feed">
+    {% for idea in ideas %}
+    <div class="idea-card">
+        <div class="idea-header">
+            <span class="username">{{ idea.username }}</span>
+            <span class="date">{{ idea.date }}</span>
+        </div>
+        <p class="idea-content">{{ idea.content }}</p>
+        <div class="vote-section">
+            <span class="vote-count">{{ idea.vote_count }}</span>
+            {% if idea.voted %}
+                <span class="heart voted">❤️</span>
+            {% else %}
+                <form action="/vote/{{ idea.id }}" method="get" style="display:inline;">
+                    <button type="submit" class="heart not-voted">🤍</button>
+                </form>
+            {% endif %}
+            <button class="comment-button" onclick="toggleCommentForm(this)">💬 Comment</button>
+        </div>
+         <div class="comment-section">
+        <form action="/comment/{{ idea.id }}" method="post" style="display:none;" class="comment-form">
+            <textarea name="comment" placeholder="Scrie un comentariu..." required></textarea>
+            <button type="submit">Trimite</button>
+        </form>
+
+        <div class="comments-list">
+            {% for comment in idea.comments %}
+            <div class="comment">
+                <span class="comment-meta"><b>{{ comment.author }}</b> - {{ comment.date }}</span><br>
+                <span class="comment-content">{{ comment.content }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+function toggleCommentForm(btn) {
+      const card = btn.closest('.idea-card');
+    const form = card.querySelector('.comment-form');
+    if (form) {
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+}
+</script>
+</body>
+</html>
