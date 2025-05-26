@@ -25,11 +25,11 @@
             {% if idea.voted %}
                 <span class="heart voted">❤️</span>
             {% else %}
-                <form action="/vote/{{ idea.id }}" method="get" style="display:inline;">
+                <form action="/vote/{{ idea.id }}" method="get" style="display:inline;" class="like">
                     <button type="submit" class="heart not-voted">🤍</button>
                 </form>
             {% endif %}
-            <button class="comment-button" onclick="toggleCommentForm(this)">💬 Comment</button>
+            <button class="comment-button" onclick="toggleCommentForm(this)">💬</button>
         </div>
          <div class="comment-section">
         <form action="/comment/{{ idea.id }}" method="post" style="display:none;" class="comment-form">

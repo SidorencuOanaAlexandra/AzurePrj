@@ -1,4 +1,4 @@
-    body {
+        body {
         font-family: 'Segoe UI', sans-serif;
         background-color: #f5f6fa;
         margin: 0;
@@ -30,14 +30,17 @@
         margin-bottom: 15px;
         border-radius: 10px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        height: auto;
+        margin-left: 80px;
+        margin-right: 80px;
     }
 
     .idea-content {
         font-size: 1.1em;
         margin-bottom: 10px;
-        width: 80%;
-        height: auto;
+            max-width: 100%;
+            word-break: break-word;
+            overflow-wrap: break-word;
+
     }
 
     .vote-section {
@@ -52,12 +55,32 @@
         color: #555;
     }
 
-    .heart {
-        font-size: 1.5em;
+
+    .heart,
+    .comment-button {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        font-size: 1.2em;
+        border-radius: 6px; /* colțuri moi */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ccc;
+        background-color: white;
         cursor: pointer;
-        background: none;
-        border: none;
+        transition: background-color 0.3s ease;
     }
+
+    .heart:hover,
+    .comment-button:hover {
+        background-color: #f0f0f0;
+    }
+
+
+
+
+
 
     .voted {
         color: red;
@@ -93,6 +116,7 @@
 
 .comment-form {
     margin-bottom: 10px;
+
 }
 
 .comment-form textarea {
@@ -114,4 +138,112 @@
 .comment-meta {
     font-size: 0.85em;
     color: #555;
+}
+
+
+
+
+
+
+/* Asigură alinierea centrului pe ecran */
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* fundal deschis */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Stilizare pentru formularul de login */
+form {
+    background-color: #fdf5e6; /* crem deschis */
+    border: 1px solid #d4b48c;
+    padding: 30px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Titlu din formular */
+form h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #5a4b2e;
+}
+
+
+
+
+
+
+/* Inputuri */
+form input {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+/* Butonul de login */
+form button {
+    padding: 10px;
+    font-size: 1em;
+    background-color: #d4b48c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #b79c74;
+}
+
+/* Paragraful cu linkul de înregistrare */
+form + p {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #444;
+}
+
+form + p a {
+    color: #8c6b3e;
+    text-decoration: none;
+}
+
+form + p a:hover {
+    text-decoration: underline;
+}
+
+comment-form {
+
+}
+
+.like {
+    background-color: #fdf5e6;
+    border: 0px;
+    padding: 0px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-block-end: 0;
+}
+
+.comment-section form {
+    width: 95%;
+    max-width: 96%;
 }
