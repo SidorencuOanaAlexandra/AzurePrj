@@ -7,10 +7,11 @@ ui = Blueprint('templates', __name__)
 
 @ui.route('/')
 def index():
-    if 'user_id' not in session:
-        return redirect(url_for('templates.login'))
-    ideas = service.list_ideas_for_user(session['user_id'])
-    return render_template('index.html', ideas=ideas)
+    # if 'user_id' not in session:
+    #     return redirect(url_for('templates.login'))
+    # ideas = service.list_ideas_for_user(session['user_id'])
+    # return render_template('index.html', ideas=ideas)
+    return render_template('login.html')
 
 @ui.route('/submit', methods=['POST'])
 def submit():
