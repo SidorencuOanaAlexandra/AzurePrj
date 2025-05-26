@@ -1,10 +1,11 @@
 import pyodbc
 from flask import Flask
 from config import Config
-from models.models import db
 from routes import ui
+from models.models import db, User, Idea, Vote, Comment
 
 app = Flask(__name__)
+app.secret_key = Config.SECRET_KEY
 app.config.from_object(Config)
 db.init_app(app)
 app.register_blueprint(ui)
