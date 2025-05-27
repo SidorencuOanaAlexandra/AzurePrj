@@ -1,26 +1,32 @@
-# templates/routes.py
 from flask import Blueprint, render_template, redirect, request, session, url_for, flash
-import service
-import templates
+from utils.auth_utils import login_required
+import utils.analytics as analytics
+import services.commentService as commentService
+import services.ideaService as ideaService
+import services.userService as userService
+import services.voteService as voteService
 
 ui = Blueprint('templates', __name__)
 
 @ui.route('/')
+@login_required
 def index():
     if 'user_id' not in session:
         return redirect(url_for('templates.login'))
-    ideas = service.list_ideas_for_user(session['user_id'])
+    ideas = ideaService.list_ideas_for_user(session['user_id'])
     return render_template('index.html', ideas=ideas)
 
 @ui.route('/submit', methods=['POST'])
+@login_required
 def submit():
     content = request.form['content']
-    service.submit_idea(session['user_id'], content)
+    ideaService.add_idea(session['user_id'], content)
     return redirect(url_for('templates.index'))
 
 @ui.route('/vote/<int:idea_id>')
+@login_required
 def vote(idea_id):
-    service.add_vote(session['user_id'], idea_id)
+    voteService.add_vote(session['user_id'], idea_id)
     return redirect(url_for('templates.index'))
 
 @ui.route('/login', methods=['GET', 'POST'])
@@ -28,7 +34,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = service.authenticate_user(username, password)
+        user = userService.authenticate_user(username, password)
         if user:
             session['user_id'] = user.id
             session['username'] = user.username
@@ -43,7 +49,7 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        user = service.register_user(username, email, password)
+        user = userService.add_user(username, email, password)
         if user:
             flash('Account created. Please login.')
             return redirect(url_for('templates.login'))
@@ -54,14 +60,15 @@ def register():
 
 
 @ui.route('/comment/<int:idea_id>', methods=['POST'])
+@login_required
 def comment(idea_id):
     if 'user_id' not in session:
         return redirect(url_for('templates.login'))
     content = request.form.get('comment')
 
-    if service.is_negative_comment(content):
+    if analytics.is_negative_comment(content):
         flash("Comentariul este negativ și nu a fost adăugat.")
         return redirect(url_for('templates.index'))
 
-    service.add_comment(session['user_id'], idea_id, content)
+    commentService.add_comment(session['user_id'], idea_id, content)
     return redirect(url_for('templates.index'))
