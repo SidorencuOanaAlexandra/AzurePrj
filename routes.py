@@ -51,10 +51,17 @@ def register():
             flash('Username already taken')
     return render_template('register.html')
 
+
+
 @ui.route('/comment/<int:idea_id>', methods=['POST'])
 def comment(idea_id):
     if 'user_id' not in session:
         return redirect(url_for('templates.login'))
     content = request.form.get('comment')
+
+    if service.is_negative_comment(content):
+        flash("Comentariul este negativ și nu a fost adăugat.")
+        return redirect(url_for('templates.index'))
+
     service.add_comment(session['user_id'], idea_id, content)
     return redirect(url_for('templates.index'))

@@ -24,6 +24,7 @@ class Idea(db.Model):
     content = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     votes = db.relationship('Vote', backref='idea', lazy=True)
+    sentiment = db.Column(db.String(50))
 
 class Vote(db.Model):
     __tablename__ = 'votes'
