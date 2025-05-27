@@ -19,7 +19,7 @@
             <span class="username">{{ idea.username }}</span>
             <span class="date">{{ idea.date }}</span>
         </div>
-        <div class="idea-content">{{ idea.content }}</div>
+        <div class="idea-content">{{ idea.content }} <span> {{ idea.sentiment }} </span> -</div>
         <div class="vote-section">
             <span class="vote-count">{{ idea.vote_count }}</span>
             {% if idea.voted %}
@@ -59,5 +59,13 @@ function toggleCommentForm(btn) {
     }
 }
 </script>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      alert("{{ messages[0] }}");
+    </script>
+  {% endif %}
+{% endwith %}
 </body>
 </html>

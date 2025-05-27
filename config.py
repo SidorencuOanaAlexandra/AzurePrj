@@ -21,3 +21,5 @@ class Config:
         "mssql+pyodbc://server1234:test211!@server1234.database.windows.net:1433/"
         "cloud_db?driver=ODBC+Driver+17+for+SQL+Server"
     )
+    endpoint = "https://languageaiservice123.cognitiveservices.azure.com/"
+    key = "2mj4KVRggvMrDZLQz7hHJRHgfCiX0c9EwsC7G5W74EGjZU8m3sLiJQQJ99BEAC5RqLJXJ3w3AAAEACOGFDCs"
