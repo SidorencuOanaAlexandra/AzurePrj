@@ -3,7 +3,7 @@
 
 </style>
 <head>
-    <meta http-equiv="refresh" content="120"> <!-- Refresh la fiecare 2 minute -->
+    <meta http-equiv="refresh" content="10"> <!-- Refresh la fiecare 2 minute -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <span class="username">{{ idea.username }}</span>
             <span class="date">{{ idea.date }}</span>
         </div>
-        <div class="idea-content">{{ idea.content }} <span> {{ idea.sentiment }} </span> -</div>
+        <div class="idea-content">{{ idea.content }}</div>
         <div class="vote-section">
             <span class="vote-count">{{ idea.vote_count }}</span>
             {% if idea.voted %}
